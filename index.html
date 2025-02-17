@@ -289,7 +289,7 @@
         <model-viewer camera-controls touch-action="pan-y" autoplay ar ar-modes="webxr scene-viewer" scale="0.2 0.2 0.2" shadow-intensity="1" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" alt="An animated 3D model of a robot"></model-viewer>
         <div class="loader"></div>
         <!-- Engine Sound -->
-        <audio id="Harley-Davidson" src="https://www.soundjay.com/transportation/sounds/motorcycle-ride-01.mp3" preload="auto"></audio>
+        <audio id="engine-sound" src="https://www.soundjay.com/transportation/sounds/motorcycle-ride-01.mp3" preload="auto"></audio>
     </div>
 
     <script>
@@ -297,12 +297,14 @@
         window.addEventListener('load', () => {
             const loadingScreen = document.getElementById('loading-screen');
             const engineSound = document.getElementById('engine-sound');
-        
+
             // Play engine sound
-           engineSound.play().catch((error) => {
+            engineSound.play().catch((error) => {
                 console.error("Audio playback failed:", error);
-           });
-            // Hide loading screen after 5 seconds
+                // Handle the error (e.g., show a message to the user)
+            });
+
+            // Hide loading screen after 3 seconds and stop the audio
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
                 engineSound.pause(); // Stop the audio
@@ -315,15 +317,14 @@
         <header class="header">
             <img src="https://ucarecdn.com/3110cf46-fa3c-46e6-a234-cd3c9149ed60/Ajmal.jpg" class="profile-pic" alt="Ajmal Shan P.">
             <h1>Ajmal Shan P.</h1>
-            <p>BTech Student | AI & Data Science </p>
+            <p>BTech Student | AI & Data Science</p>
             <img src="https://ucarecdn.com/f3c456e0-c080-4a78-a491-76e2eabb49ae/A7lJMoremovebgpreview.png" class="car-animation" alt="Car Animation">
         </header>
-       
         <div class="content">
             <div class="section" id="about">
                 <h2>About Me</h2>
                 <p>
-                    Hi, I’m Ajmal Shan, but you can call me Sha <3. I’m a third-year BTech student specializing in Artificial Intelligence and Data Science at Ilahia College of Engineering and Technology. I have a keen interest in Gen Ai and am looking to get learn more about it. I do hava a concern about the impact of social media on mental health and the balance between connection and isolation. Feel free to connect with me :)
+                    Hi, I’m Ajmal Shan, but you can call me Sha <3. I’m a third-year BTech student specializing in Artificial Intelligence and Data Science at Ilahia College of Engineering and Technology. I have a keen interest in Gen AI and looking forward to learn more about it. I do hava a concern about the impact of social media on mental health and the balance between connection and isolation. Feel free to connect with me :)
                 </p>
                  <div class="contact-info">
             <div class="social-links">
@@ -339,28 +340,28 @@
                 <div class="projects">
                     <div class="project">
                         <h3>Plant Disease Identifier</h3>
-                        <p>A web application that uses ML to help gardeners identify plant diseases through leaf images.</p>
-                        <a href="https://github.com/Sha-330/Plant-disease-detection-using-leaf" target="_blank">View Project</a>
+                        <p>A web application that uses ML to help gardeners identify plant diseases through leaf images by using random forest.</p>
+                        <a href="#" target="_blank">View Project</a>
                     </div>
                     <div class="project">
                         <h3>Depression Detection</h3>
-                        <p>A project that detects depression from emotions using a decision tree algorithm.</p>
-                        <a href="https://github.com/Sha-330/Deppression-Detection-Model" target="_blank">View Project</a>
+                        <p>A project that detects depression from emotions using a decision tree algorithm,CNN and VGG16.</p>
+                        <a href="https://github.com/Sha-330/Deppression-Detection-Model" target="https://github.com/Sha-330/Deppression-Detection-Model">View Project</a>
                     </div>
                     <div class="project">
                         <h3>HOLOMOVER</h3>
                         <p>A gesture-controlled system for online presentations and gaming, developed using Python, OpenCV, and Mediapipe.</p>
-                        <a href="#" target="_blank">Soon to be uploaded in github</a>
+                        <a href="https://github.com/Sha-330/Plant-disease-detection-using-leaf" target="https://github.com/Sha-330/Plant-disease-detection-using-leaf">Soon to be uploaded in Git-Hub</a>
                     </div>
                     <div class="project">
-                        <h3>HIRA(Health Index & Result Analyzer</h3>
-                        <p>A ML Model that can tell patient's condition based on the text-based results like blood,urine and image-based results like MRI,X-Ray,.... It can reduce the physical results and can be helpful to the DOctors foor faster diagnosing of patients. .</p>
-                        <a href="#" target="_blank">Ongoing Mini Project</a>
+                        <h3>HIRA(Health Index & Result Analayzer</h3>
+                        <p>A ML Model that can determine a patients condition from text-based results like Blood, Urine and also image-based results like MRI,X-Ray,....This can reduce the form these results from physically to digitally and also helpful to doctors for faster diagnosis and also haelthy companion between a patient and a doctor.</p>
+                        <a href="#" target="_blank">Ongoing Mini-Project</a>
                     </div>
                     <div class="project">
-                        <h3>Video analayzer</h3>
-                        <p>AN AI-ML model that analyze a video frame-byframes and can answer to the questions of a user.</p>
-                        <a href="#" target="_blank">Ongoing Hobby-project</a>
+                        <h3>Video analyzer</h3>
+                        <p>An AI-ML model , that takes a video as a input and analyze it by frame-by-frame and the user can ask query to the model , it will answer.</p>
+                        <a href="#" target="_blank">Ongoing Hobby-Project</a>
                     </div>
                 </div>
             </div>
