@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </style>
     <title>Ajmal Shan P. </title>
     <meta name="description" content="Portfolio of Ajmal Shan P., BTech student specializing in AI & Data Science">
     <meta name="keywords" content="AI, Data Science, Portfolio, BTech, Machine Learning, Cars">
@@ -248,13 +251,25 @@
             display: block;
             margin: 0 auto;
         }
-
-        .car-animation {
-            position: absolute;
-            bottom: -20px;
-            left: -100px;
-            width: 100px;
-            animation: moveCar 8s linear infinite;
+            
+        .quote-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
         }
 
         @keyframes moveCar {
@@ -318,13 +333,12 @@
             <img src="https://ucarecdn.com/5b1b33d2-a95c-4afe-8618-5bb65d6d51f9/shobha.jpg" class="profile-pic" alt="Ajmal Shan P.">
             <h1>Ajmal Shan P.</h1>
             <p>BTech Student | AI & Data Science</p>
-            <img src="https://ucarecdn.com/f3c456e0-c080-4a78-a491-76e2eabb49ae/A7lJMoremovebgpreview.png" class="car-animation" alt="Car Animation">
         </header>
         <div class="content">
             <div class="section" id="about">
                 <h2>About Me</h2>
                 <p>
-                    Hi, I’m Ajmal Shan, but you can call me Sha <3. I’m a third-year BTech student specializing in Artificial Intelligence and Data Science at Ilahia College of Engineering and Technology. I have a keen interest in Gen AI and looking forward to learn more about it. I do hava a concern about the impact of social media on mental health and the balance between connection and isolation. Feel free to connect with me :)
+                    Hi, I’m Ajmal Shan, a third-year BTech student specializing in Artificial Intelligence and Data Science at Ilahia College of Engineering and Technology. I have a keen interest in Gen AI and looking forward to learn more about it. I do hava a concern about the impact of social media on mental health and the balance between connection and isolation. Feel free to connect with me :)
                 </p>
                  <div class="contact-info">
             <div class="social-links">
@@ -388,6 +402,25 @@
                 </ul>
             </div>
         </div>
+        <div class="quote-box">
+        <p id="quote">Press the button to generate a quote!</p>
+        <button onclick="generateQuote()">Get Quote</button>
+    </div>
+
+    <script>
+        const quotes = [
+            "The best way to predict the future is to create it.",
+            "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "You miss 100% of the shots you don’t take.",
+            "Life is 10% what happens to us and 90% how we react to it.",
+            "Do what you can, with what you have, where you are."
+        ];
+        
+        function generateQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById("quote").innerText = quotes[randomIndex];
+        }
+    </script>
        
         <model-viewer id="pickMaterial" shadow-intensity="1" camera-controls touch-action="pan-y" disable-tap src="https://modelviewer.dev/shared-assets/models/glTF-Sample-Assets/Models/MetalRoughSpheresNoTextures/glTF-Binary/MetalRoughSpheresNoTextures.glb" ar ar-modes="webxr" scale="100 100 100" alt="A Material Picking Example">
 </model-viewer>
@@ -821,7 +854,7 @@ interface Image {
 }
 </script>
         <footer>
-            <p>© 2025 Ajmal Shan P. | All Rights Reserved</p>
+            <p>© 2025 Ajmal Shan P </p>
             <a href="#" onclick="accessAdmin()">Admin Page</a>
         </footer>
         <script>
