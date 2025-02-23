@@ -45,13 +45,13 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* General Styles */
+        
         :root {
-            --primary-color: #ff5733; /* Orange accent color */
-            --secondary-color: #333; /* Dark text color */
-            --bg-color: #f4f4f9; /* Light background */
-            --card-bg: #e0e0eb; /* Card background */
-            --card-hover-bg: #d3f2ff; /* Card hover background */
+            --primary-color: #ff5733; 
+            --secondary-color: #333; 
+            --bg-color: #f4f4f9; 
+            --card-bg: #e0e0eb; 
+            --card-hover-bg: #d3f2ff; 
         }
 
         body {
@@ -284,11 +284,11 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
+    
     <div id="loading-screen">
         <model-viewer camera-controls touch-action="pan-y" autoplay ar ar-modes="webxr scene-viewer" scale="0.2 0.2 0.2" shadow-intensity="1" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" alt="An animated 3D model of a robot"></model-viewer>
         <div class="loader"></div>
-        <!-- Engine Sound -->
+        
         <audio id="engine-sound" src="https://www.soundjay.com/transportation/sounds/motorcycle-ride-01.mp3" preload="auto"></audio>
     </div>
 
@@ -301,13 +301,13 @@
             // Play engine sound
             engineSound.play().catch((error) => {
                 console.error("Audio playback failed:", error);
-                // Handle the error (e.g., show a message to the user)
+                
             });
 
             // Hide loading screen after 3 seconds and stop the audio
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
-                engineSound.pause(); // Stop the audio
+                engineSound.pause(); 
                  
             }, 5950);
         });
@@ -388,7 +388,7 @@
                 </ul>
             </div>
         </div>
-        <!-- 3D Car Model -->
+       
         <model-viewer id="pickMaterial" shadow-intensity="1" camera-controls touch-action="pan-y" disable-tap src="https://modelviewer.dev/shared-assets/models/glTF-Sample-Assets/Models/MetalRoughSpheresNoTextures/glTF-Binary/MetalRoughSpheresNoTextures.glb" ar ar-modes="webxr" scale="100 100 100" alt="A Material Picking Example">
 </model-viewer>
 <script type="module">
