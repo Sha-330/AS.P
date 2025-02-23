@@ -283,6 +283,22 @@
             box-shadow: 0 5px 15px rgba(255, 87, 51, 0.3);
         }
 
+        /* Animation for quote text */
+        #quote.animate {
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .header h1 { font-size: 2em; }
@@ -313,9 +329,8 @@
 
         /* Accessibility Improvements */
         @media (prefers-reduced-motion: reduce) {
-            * {
+            #quote.animate {
                 animation: none !important;
-                transition: none !important;
             }
         }
     </style>
@@ -339,7 +354,6 @@
         (function trackVisitor() {
             const visitors = JSON.parse(localStorage.getItem('portfolioVisitors') || '[]');
             const timestamp = new Date().toISOString();
-            // Simulate IP using a random ID (actual IP requires server-side logic)
             const visitorId = 'visitor_' + Math.random().toString(36).substr(2, 9);
             visitors.push({ id: visitorId, timestamp: timestamp });
             localStorage.setItem('portfolioVisitors', JSON.stringify(visitors));
@@ -473,27 +487,26 @@
                 ];
                 
                 function generateQuote() {
+                    const quoteElement = document.getElementById("quote");
                     const randomIndex = Math.floor(Math.random() * quotes.length);
-                    document.getElementById("quote").innerText = quotes[randomIndex];
+                    
+                    // Remove the animation class to reset it
+                    quoteElement.classList.remove("animate");
+                    
+                    // Force reflow to restart animation
+                    void quoteElement.offsetWidth;
+                    
+                    // Update the quote and add the animation class
+                    quoteElement.innerText = quotes[randomIndex];
+                    quoteElement.classList.add("animate");
                 }
             </script>
         </div>
         <footer>
             <p>© 2025 Ajmal Shan P</p>
-            <a href="#" onclick="accessAdmin()">Admin Page</a>
+            <a href="#" id="adminLink">Admin Page</a>
         </footer>
-        <script>
-            function accessAdmin() {
-                const password = 'catmouse'; // Plaintext password
-                const userInput = prompt("Enter Admin Password:");
-                if (userInput === password) { // Direct comparison
-                    sessionStorage.setItem('adminAuthenticated', 'true');
-                    window.location.href = "admin.html";
-                } else {
-                    alert("Incorrect password.");
-                }
-            }
-        </script>
+        <script src="admin.js"></script>
     </div>
 </body>
 </html>
