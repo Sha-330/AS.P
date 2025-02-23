@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </style>
-    <title>Ajmal Shan P. </title>
+    <title>Ajmal Shan P.</title>
     <meta name="description" content="Portfolio of Ajmal Shan P., BTech student specializing in AI & Data Science">
     <meta name="keywords" content="AI, Data Science, Portfolio, BTech, Machine Learning, Cars">
-    <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script> <!-- Added back -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preload" href="https://ucarecdn.com/5b1b33d2-a95c-4afe-8618-5bb65d6d51f9/shobha.jpg" as="image">
     <style>
+        /* Modern CSS Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         /* Loading Screen */
         #loading-screen {
             position: fixed;
@@ -20,27 +24,22 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000;
+            background: linear-gradient(135deg, #000000, #1a1a1a);
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             z-index: 1000;
-        }
-
-        #loading-screen h1 {
-            color: #fff;
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            transition: opacity 0.5s ease-out;
         }
 
         #loading-screen .loader {
-            border: 5px solid #333;
-            border-top: 5px solid #ff5733;
+            border: 5px solid #ffffff33;
+            border-top: 5px solid var(--primary-color);
             border-radius: 50%;
             width: 50px;
             height: 50px;
-            animation: spin 1s linear infinite;
+            animation: spin 1s cubic-bezier(0.76, 0.35, 0.2, 0.75) infinite;
         }
 
         @keyframes spin {
@@ -48,13 +47,16 @@
             100% { transform: rotate(360deg); }
         }
 
-        
         :root {
-            --primary-color: #ff5733; 
-            --secondary-color: #333; 
-            --bg-color: #f4f4f9; 
-            --card-bg: #e0e0eb; 
-            --card-hover-bg: #d3f2ff; 
+            --primary-color: #ff5733;
+            --secondary-color: #333;
+            --accent-color: #4a90e2;
+            --bg-color: #f4f4f9;
+            --card-bg: #ffffff;
+            --card-hover-bg: #f0f7ff;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --animation-speed: 0.3s;
         }
 
         body {
@@ -66,20 +68,28 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            color: var(--text-primary);
+            line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
         .portfolio-container {
-            background-color: #fff;
+            background-color: var(--card-bg);
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             width: 90%;
             max-width: 1000px;
             overflow: hidden;
             position: relative;
+            transition: transform var(--animation-speed) ease;
+        }
+
+        .portfolio-container:hover {
+            transform: translateY(-5px);
         }
 
         .header {
-            background-color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--secondary-color), #1a1a1a);
             color: white;
             padding: 30px;
             text-align: center;
@@ -91,12 +101,12 @@
             width: 150px;
             height: 150px;
             object-fit: cover;
-            border: 5px solid #fff;
-            transition: transform 0.3s ease;
+            border: 5px solid var(--primary-color);
+            transition: transform var(--animation-speed) ease;
         }
 
         .header img.profile-pic:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
         }
 
         .header h1 {
@@ -117,7 +127,7 @@
             margin: 10px;
             font-size: 1.1em;
             font-weight: bold;
-            transition: transform 0.3s, color 0.3s;
+            transition: transform var(--animation-speed), color var(--animation-speed);
         }
 
         .contact-info a:hover {
@@ -134,7 +144,7 @@
         }
 
         .section h2 {
-            color: var(--secondary-color);
+            color: white;
             font-size: 2em;
             border-bottom: 3px solid var(--primary-color);
             display: inline-block;
@@ -159,7 +169,7 @@
             flex: 1;
             min-width: 250px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            transition: all var(--animation-speed) ease;
         }
 
         .project:hover, .skill:hover {
@@ -172,7 +182,7 @@
             color: var(--secondary-color);
             font-weight: bold;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color var(--animation-speed);
         }
 
         .project a:hover {
@@ -185,11 +195,11 @@
             gap: 20px;
             margin: 30px 0;
         }
-        
+
         .social-links a {
             color: var(--secondary-color);
             font-size: 1.8em;
-            transition: transform 0.3s, color 0.3s;
+            transition: transform var(--animation-speed), color var(--animation-speed);
             text-decoration: none;
             display: flex;
             flex-direction: column;
@@ -214,18 +224,9 @@
             transform: perspective(500px) translateZ(10px);
         }
 
-        /* Specific colors for each social media */
-        .social-links .github {
-            color: #333;
-        }
-
-        .social-links .whatsapp {
-            color: #25D366;
-        }
-
-        .social-links .linkedin {
-            color: #0077B5;
-        }
+        .social-links .github { color: #333; }
+        .social-links .whatsapp { color: #25D366; }
+        .social-links .linkedin { color: #0077B5; }
 
         footer {
             background-color: var(--secondary-color);
@@ -233,32 +234,38 @@
             text-align: center;
             padding: 15px 0;
             font-size: 1.1em;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-color);
         }
 
         footer a {
             color: var(--primary-color);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color var(--animation-speed);
         }
 
         footer a:hover {
             color: #ffa500;
         }
 
-        model-viewer {
-            width: 100%;
-            height: 300px;
-            display: block;
-            margin: 0 auto;
-        }
-            
         .quote-box {
-            background: white;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
+            color: black;
         }
+
         button {
             margin-top: 10px;
             padding: 10px 20px;
@@ -267,60 +274,76 @@
             color: white;
             cursor: pointer;
             border-radius: 5px;
+            transition: all var(--animation-speed) ease;
         }
+
         button:hover {
-            background: #0056b3;
+            background: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 87, 51, 0.3);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
-            }
-            .header p {
-                font-size: 1.1em;
-            }
-            .section h2 {
-                font-size: 1.8em;
-            }
-            .section p {
-                font-size: 1em;
-            }
+            .header h1 { font-size: 2em; }
+            .header p { font-size: 1.1em; }
+            .section h2 { font-size: 1.8em; }
+            .section p { font-size: 1em; }
             .projects, .skills {
                 flex-direction: column;
                 align-items: center;
             }
         }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1a1a;
+                --card-bg: #2d2d2d;
+                --card-hover-bg: #353535;
+                --text-primary: #ffffff;
+                --text-secondary: #cccccc;
+            }
+            .portfolio-container {
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+            .section h2 { color: white; }
+            .quote-box { color: black; }
+        }
+
+        /* Accessibility Improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
     </style>
 </head>
 <body>
-    
     <div id="loading-screen">
-        <model-viewer camera-controls touch-action="pan-y" autoplay ar ar-modes="webxr scene-viewer" scale="0.2 0.2 0.2" shadow-intensity="1" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" alt="An animated 3D model of a robot"></model-viewer>
+        <model-viewer camera-controls touch-action="pan-y" autoplay ar ar-modes="webxr scene-viewer" scale="0.2 0.2 0.2" shadow-intensity="1" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" alt="An animated 3D model of a robot"></model-viewer> <!-- Added back -->
         <div class="loader"></div>
-        
-        <audio id="engine-sound" src="https://www.soundjay.com/transportation/sounds/motorcycle-ride-01.mp3" preload="auto"></audio>
     </div>
 
     <script>
-        // Loading Screen Logic
+        // Loading screen logic
         window.addEventListener('load', () => {
             const loadingScreen = document.getElementById('loading-screen');
-            const engineSound = document.getElementById('engine-sound');
-
-            // Play engine sound
-            engineSound.play().catch((error) => {
-                console.error("Audio playback failed:", error);
-                
-            });
-
-            // Hide loading screen after 3 seconds and stop the audio
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
-                engineSound.pause(); 
-                 
             }, 5950);
         });
+
+        // Visitor tracking (simplified using localStorage)
+        (function trackVisitor() {
+            const visitors = JSON.parse(localStorage.getItem('portfolioVisitors') || '[]');
+            const timestamp = new Date().toISOString();
+            // Simulate IP using a random ID (actual IP requires server-side logic)
+            const visitorId = 'visitor_' + Math.random().toString(36).substr(2, 9);
+            visitors.push({ id: visitorId, timestamp: timestamp });
+            localStorage.setItem('portfolioVisitors', JSON.stringify(visitors));
+        })();
     </script>
 
     <div class="portfolio-container">
@@ -328,21 +351,21 @@
             <img src="https://ucarecdn.com/5b1b33d2-a95c-4afe-8618-5bb65d6d51f9/shobha.jpg" class="profile-pic" alt="Ajmal Shan P.">
             <h1>Ajmal Shan P.</h1>
             <p>BTech Student | AI & Data Science</p>
+            <div class="contact-info">
+                <div class="social-links">
+                    <a href="https://github.com/Sha-330" target="_blank" class="github"><i class="fab fa-github"></i><span>GitHub</span></a>
+                    <a href="https://www.linkedin.com/in/ajmal-shan-p-591258244" target="_blank" class="linkedin"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+                    <a href="https://wa.me/918606496666" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
+                    <a href="mailto:shan.ajmalp@gmail.com" class="email"><i class="fas fa-envelope"></i><span>Email</span></a>
+                </div>
+            </div>
         </header>
         <div class="content">
             <div class="section" id="about">
                 <h2>About Me</h2>
                 <p>
-                    Hi, I’m Ajmal Shan, a third-year BTech student specializing in Artificial Intelligence and Data Science at Ilahia College of Engineering and Technology. I have a keen interest in Gen AI and looking forward to learn more about it. I do hava a concern about the impact of social media on mental health and the balance between connection and isolation. Feel free to connect with me :)
+                    Hi, I’m Ajmal Shan, a third-year BTech student specializing in Artificial Intelligence and Data Science at Ilahia College of Engineering and Technology. I have a keen interest in Gen AI and looking forward to learn more about it. I do have a concern about the impact of social media on mental health and the balance between connection and isolation. Feel free to connect with me :)
                 </p>
-                 <div class="contact-info">
-            <div class="social-links">
-                <a href="https://github.com/Sha-330" target="_blank" class="github"><i class="fab fa-github"></i><span>GitHub</span></a>
-                <a href="https://www.linkedin.com/in/ajmal-shan-p-591258244" target="_blank" class="linkedin"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
-                <a href="https://wa.me/918606496666" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
-                <a href="mailto:shan.ajmalp@gmail.com" class="email"><i class="fas fa-envelope"></i><span>Email</span></a>
-            </div>
-        </div>
             </div>
             <div class="section" id="projects">
                 <h2>Projects</h2>
@@ -354,22 +377,22 @@
                     </div>
                     <div class="project">
                         <h3>Depression Detection</h3>
-                        <p>A project that detects depression from emotions using a decision tree algorithm,CNN and VGG16.</p>
-                        <a href="https://github.com/Sha-330/Deppression-Detection-Model" target="https://github.com/Sha-330/Deppression-Detection-Model">View Project</a>
+                        <p>A project that detects depression from emotions using a decision tree algorithm, CNN and VGG16.</p>
+                        <a href="https://github.com/Sha-330/Deppression-Detection-Model" target="_blank">View Project</a>
                     </div>
                     <div class="project">
                         <h3>HOLOMOVER</h3>
                         <p>A gesture-controlled system for online presentations and gaming, developed using Python, OpenCV, and Mediapipe.</p>
-                        <a href="https://github.com/Sha-330/Plant-disease-detection-using-leaf" target="https://github.com/Sha-330/Plant-disease-detection-using-leaf">Soon to be uploaded in Git-Hub</a>
+                        <a href="https://github.com/Sha-330/Plant-disease-detection-using-leaf" target="_blank">Soon to be uploaded in Git-Hub</a>
                     </div>
                     <div class="project">
-                        <h3>HIRA(Health Index & Result Analayzer</h3>
-                        <p>A ML Model that can determine a patients condition from text-based results like Blood, Urine and also image-based results like MRI,X-Ray,....This can reduce the form these results from physically to digitally and also helpful to doctors for faster diagnosis and also haelthy companion between a patient and a doctor.</p>
+                        <h3>HIRA (Health Index & Result Analyzer)</h3>
+                        <p>A ML Model that can determine a patients condition from text-based results like Blood, Urine and also image-based results like MRI, X-Ray,.... This can reduce the form these results from physically to digitally and also helpful to doctors for faster diagnosis and also healthy companion between a patient and a doctor.</p>
                         <a href="#" target="_blank">Ongoing Mini-Project</a>
                     </div>
                     <div class="project">
-                        <h3>Video analyzer</h3>
-                        <p>An AI-ML model , that takes a video as a input and analyze it by frame-by-frame and the user can ask query to the model , it will answer.</p>
+                        <h3>Video Analyzer</h3>
+                        <p>An AI-ML model, that takes a video as an input and analyzes it by frame-by-frame and the user can ask query to the model, it will answer.</p>
                         <a href="#" target="_blank">Ongoing Hobby-Project</a>
                     </div>
                 </div>
@@ -389,514 +412,84 @@
                 <h2>Roles</h2>
                 <p>I held the following positions, each contributing to my growth and leadership skills:</p>
                 <ul>
-                    <li>Vice-chairperson (2023-24) Student branch- IEEE-ICET</li>
+                    <li>Vice-chairperson (2023-24) Student branch - IEEE-ICET</li>
                     <li>Senior Rover Mate at SRM Kottakal Open Rover Crew</li>
                     <li>Co-Lead of the Game Development Club (GDC) at ICET</li>
-                    <li>Department Representative(AD) for the Student Union - ICET</li>
-                    <li>Volunteered in various Organization</li>
+                    <li>Department Representative (AD) for the Student Union - ICET</li>
+                    <li>Volunteered in various Organizations</li>
                 </ul>
             </div>
+            <div class="quote-box">
+                <p id="quote">Press the button to generate a quote!</p>
+                <button onclick="generateQuote()">Get Quote</button>
+            </div>
+            <script>
+                const quotes = [
+                    "Ask not what your country can do for you – ask what you can do for your country. – John F. Kennedy",
+                    "A nation's culture resides in the hearts and in the soul of its people. – Mahatma Gandhi",
+                    "The love of one's country is a splendid thing. But why should love stop at the border? – Pablo Casals",
+                    "The best way to find yourself is to lose yourself in the service of others. – Mahatma Gandhi",
+                    "No one has ever become poor by giving. – Anne Frank",
+                    "Service to others is the rent you pay for your room here on earth. – Muhammad Ali",
+                    "Education is the most powerful weapon which you can use to change the world. – Nelson Mandela",
+                    "The beautiful thing about learning is that no one can take it away from you. – B.B. King",
+                    "Live as if you were to die tomorrow. Learn as if you were to live forever. – Mahatma Gandhi",
+                    "Where words fail, music speaks. – Hans Christian Andersen",
+                    "Music can change the world because it can change people. – Bono",
+                    "One good thing about music, when it hits you, you feel no pain. – Bob Marley",
+                    "Cinema is a mirror by which we often see ourselves. – Alejandro González Iñárritu",
+                    "Movies touch our hearts and awaken our vision, and change the way we see things. – Martin Scorsese",
+                    "Life is like a movie; write your own ending. – Jim Henson",
+                    "The greatest thing you'll ever learn is just to love and be loved in return. – Nat King Cole",
+                    "A true man will carry his love to the grave.",
+                    "A great relationship doesn’t happen because of the love you had in the beginning, but how well you continue building love until the end.",
+                    "Trust is the glue of life. It's the most essential ingredient in effective communication. – Stephen R. Covey",
+                    "Family is not an important thing. It’s everything. – Michael J. Fox",
+                    "The love in our family flows strong and deep, leaving us memories to treasure and keep.",
+                    "A happy family is but an earlier heaven. – George Bernard Shaw",
+                    "A real friend is one who walks in when the rest of the world walks out. – Walter Winchell",
+                    "Friendship is born at that moment when one person says to another: ‘What! You too? I thought I was the only one.’ – C.S. Lewis",
+                    "A friend is someone who knows all about you and still loves you. – Elbert Hubbard",
+                    "Do what you can, with what you have, where you are. – Theodore Roosevelt",
+                    "Happiness depends upon ourselves. – Aristotle",
+                    "It always seems impossible until it’s done. – Nelson Mandela",
+                    "Doubt kills more dreams than failure ever will. – Suzy Kassem",
+                    "The purpose of our lives is to be happy. – Dalai Lama",
+                    "In the middle of every difficulty lies opportunity. – Albert Einstein",
+                    "Success is not final, failure is not fatal: it is the courage to continue that counts. – Winston Churchill",
+                    "Don’t count the days, make the days count. – Muhammad Ali",
+                    "Act as if what you do makes a difference. It does. – William James",
+                    "Sometimes you will never know the value of a moment until it becomes a memory. – Dr. Seuss",
+                    "Be yourself; everyone else is already taken. – Oscar Wilde",
+                    "Your time is limited, so don’t waste it living someone else’s life. – Steve Jobs",
+                    "Do what you feel in your heart to be right – for you’ll be criticized anyway. – Eleanor Roosevelt",
+                    "The only way to do great work is to love what you do. – Steve Jobs",
+                    "Life is really simple, but we insist on making it complicated. – Confucius",
+                    "Don’t watch the clock; do what it does. Keep going. – Sam Levenson",
+                    "A journey of a thousand miles begins with a single step. – Lao Tzu",
+                    "Fall seven times and stand up eight. – Japanese Proverb",
+                    "Pain is temporary. Quitting lasts forever. – Lance Armstrong",
+                    "If you want to fly, give up everything that weighs you down. – Buddha"
+                ];
+                
+                function generateQuote() {
+                    const randomIndex = Math.floor(Math.random() * quotes.length);
+                    document.getElementById("quote").innerText = quotes[randomIndex];
+                }
+            </script>
         </div>
-        <div class="quote-box">
-        <p id="quote">Press the button to generate a quote!</p>
-        <button onclick="generateQuote()">Get Quote</button>
-    </div>
-
-    <script>
-        const quotes = [
-           "Ask not what your country can do for you – ask what you can do for your country." – John F. Kennedy
-           "A nation's culture resides in the hearts and in the soul of its people." – Mahatma Gandhi
-           "The love of one's country is a splendid thing. But why should love stop at the border?" – Pablo Casals
-           "The best way to find yourself is to lose yourself in the service of others." – Mahatma Gandhi
-           "No one has ever become poor by giving." – Anne Frank
-           "Service to others is the rent you pay for your room here on earth." – Muhammad Ali
-           "Education is the most powerful weapon which you can use to change the world." – Nelson Mandela
-           "The beautiful thing about learning is that no one can take it away from you." – B.B. King
-           "Live as if you were to die tomorrow. Learn as if you were to live forever." – Mahatma Gandhi
-           "Where words fail, music speaks." – Hans Christian Andersen
-           "Music can change the world because it can change people." – Bono
-           "One good thing about music, when it hits you, you feel no pain." – Bob Marley
-           "Cinema is a mirror by which we often see ourselves." – Alejandro González Iñárritu
-           "Movies touch our hearts and awaken our vision, and change the way we see things." – Martin Scorsese
-           "Life is like a movie; write your own ending." – Jim Henson
-           "The greatest thing you'll ever learn is just to love and be loved in return." – Nat King Cole
-           "A true man will carry his love to the grave."
-           "A great relationship doesn’t happen because of the love you had in the beginning, but how well you continue building love until the end."
-           "Trust is the glue of life. It's the most essential ingredient in effective communication." – Stephen R. Covey
-           "Family is not an important thing. It’s everything." – Michael J. Fox
-          "The love in our family flows strong and deep, leaving us memories to treasure and keep."
-          "A happy family is but an earlier heaven." – George Bernard Shaw
-         "A real friend is one who walks in when the rest of the world walks out." – Walter Winchell
-         "Friendship is born at that moment when one person says to another: ‘What! You too? I thought I was the only one.’" – C.S. Lewis
-         "A friend is someone who knows all about you and still loves you." – Elbert Hubbard
-        "Do what you can, with what you have, where you are." – Theodore Roosevelt
-       "Happiness depends upon ourselves." – Aristotle
-      "It always seems impossible until it’s done." – Nelson Mandela
-    "Doubt kills more dreams than failure ever will." – Suzy Kassem
-   "The purpose of our lives is to be happy." – Dalai Lama
-     "In the middle of every difficulty lies opportunity." – Albert Einstein
-     "Success is not final, failure is not fatal: it is the courage to continue that counts." – Winston Churchill
-    "Don’t count the days, make the days count." – Muhammad Ali
-    "Act as if what you do makes a difference. It does." – William James
-    "Sometimes you will never know the value of a moment until it becomes a memory." – Dr. Seuss
-        "Be yourself; everyone else is already taken." – Oscar Wilde
-"Your time is limited, so don’t waste it living someone else’s life." – Steve Jobs
-"Do what you feel in your heart to be right – for you’ll be criticized anyway." – Eleanor Roosevelt
-"The only way to do great work is to love what you do." – Steve Jobs
-"Life is really simple, but we insist on making it complicated." – Confucius
-"Don’t watch the clock; do what it does. Keep going." – Sam Levenson
-"A journey of a thousand miles begins with a single step." – Lao Tzu
-"Fall seven times and stand up eight." – Japanese Proverb
-"Pain is temporary. Quitting lasts forever." – Lance Armstrong
-"If you want to fly, give up everything that weighs you down." – Buddha
-
-        ];
-        
-        function generateQuote() {
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            document.getElementById("quote").innerText = quotes[randomIndex];
-        }
-    </script>
-       
-        <model-viewer id="pickMaterial" shadow-intensity="1" camera-controls touch-action="pan-y" disable-tap src="https://modelviewer.dev/shared-assets/models/glTF-Sample-Assets/Models/MetalRoughSpheresNoTextures/glTF-Binary/MetalRoughSpheresNoTextures.glb" ar ar-modes="webxr" scale="100 100 100" alt="A Material Picking Example">
-</model-viewer>
-<script type="module">
-const modelViewer = document.querySelector("model-viewer#pickMaterial");
-
-modelViewer.addEventListener("load", () => {
-  const changeColor = (event) => {
-    if(modelViewer.modelIsVisible){
-      const material = modelViewer.materialFromPoint(event.clientX, event.clientY);
-      if (material != null) {
-        material.pbrMetallicRoughness.
-          setBaseColorFactor([Math.random(), Math.random(), Math.random()]);
-      }
-    }
-  };
-
-  document.addEventListener("click", changeColor);
-});
-</script>
-<script>
-/**
- * This is not an actual script, but an API declaration made prettier with JS syntax highlighting.
-*/
-
-/** A 2D Cartesian coordinate */
-interface Vector2DInterface {
-  u: number;
-  v: number;
-}
-
-type RGBA = [number, number, number, number];
-type RGB = [number, number, number];
-
-/**
- * A Model is the root element of a 3DOM scene graph. It gives scripts access
- * to the sub-elements found without the graph.
- */
-interface Model {
-  /**
-   * An ordered set of unique Materials found in this model. The Materials
-   * correspond to the listing of materials in the glTF, with the possible
-   * addition of a default material at the end.
-   */
-  readonly materials: Readonly<Material[]>;
-
-  /**
-   * Gets a material(s) by name.
-   * @param name the name of the material to return.
-   * @returns the first material to whose name matches `name`
-   */
-  getMaterialByName(name: string): Material|null;
-
-  /**
-   * Creates a new material variant from an existing material.
-   * @param originalMaterialIndex index of the material to clone the variant
-   *     from.
-   * @param materialName the name of the new material
-   * @param variantName the name of the variant
-   * @param activateVariant activates this material variant, i.e. the variant
-   *     material is rendered, not the existing material.
-   * @returns returns a clone of the original material, returns `null` if the
-   *     material instance for this variant already exists.
-   */
-  createMaterialInstanceForVariant(
-      originalMaterialIndex: number, newMaterialName: string,
-      variantName: string, activateVariant: boolean): Material|null;
-
-  /**
-   * Adds a variant name to the model.
-   * @param variantName
-   */
-  createVariant(variantName: string): void;
-
-  /**
-   * Adds an existing material to a variant name.
-   * @param materialIndex
-   * @param targetVariantName
-   */
-  setMaterialToVariant(materialIndex: number, targetVariantName: string): void;
-
-  /**
-   * Removes the variant name from the model.
-   * @param variantName the variant to remove.
-   */
-  deleteVariant(variantName: string): void;
-}
-
-/**
- * A Material gives the script access to modify a single, unique material found
- * in a model's scene graph.
- *
- * @see https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#reference-material
- */
-interface Material {
-  /**
-   * The name of the material, if any.
-   */
-  name: string;
-
-  readonly normalTexture: TextureInfo|null;
-  readonly occlusionTexture: TextureInfo|null;
-  readonly emissiveTexture: TextureInfo|null;
-
-  readonly emissiveFactor: Readonly<RGB>;
-  setEmissiveFactor(rgb: RGB|string): void;
-  setAlphaCutoff(cutoff: number): void;
-  getAlphaCutoff(): number;
-  setDoubleSided(doubleSided: boolean): void;
-  getDoubleSided(): boolean;
-  setAlphaMode(alphaMode: AlphaMode): void;
-  getAlphaMode(): AlphaMode;
-
-  /**
-   * PBR Next properties.
-   */
-  readonly emissiveStrength: number;
-  readonly clearcoatFactor: number;
-  readonly clearcoatRoughnessFactor: number;
-  readonly clearcoatTexture: TextureInfo;
-  readonly clearcoatRoughnessTexture: TextureInfo;
-  readonly clearcoatNormalTexture: TextureInfo;
-  readonly clearcoatNormalScale: number;
-  readonly ior: number;
-  readonly sheenColorFactor: Readonly<RGB>;
-  readonly sheenColorTexture: TextureInfo;
-  readonly sheenRoughnessFactor: number;
-  readonly sheenRoughnessTexture: TextureInfo;
-  readonly transmissionFactor: number;
-  readonly transmissionTexture: TextureInfo;
-  readonly thicknessFactor: number;
-  readonly thicknessTexture: TextureInfo;
-  readonly attenuationDistance: number;
-  readonly attenuationColor: Readonly<RGB>;
-  readonly specularFactor: number;
-  readonly specularTexture: TextureInfo;
-  readonly specularColorFactor: Readonly<RGB>;
-  readonly specularColorTexture: TextureInfo;
-  readonly iridescenceFactor: number;
-  readonly iridescenceTexture: TextureInfo;
-  readonly iridescenceIor: number;
-  readonly iridescenceThicknessMinimum: number;
-  readonly iridescenceThicknessMaximum: number;
-  readonly iridescenceThicknessTexture: TextureInfo;
-  readonly anisotropyStrength: number;
-  readonly anisotropyRotation: number;
-  readonly anisotropyTexture: TextureInfo;
-
-  setEmissiveStrength(emissiveStrength: number): void;
-  setClearcoatFactor(clearcoatFactor: number): void;
-  setClearcoatRoughnessFactor(clearcoatRoughnessFactor: number): void;
-  setClearcoatNormalScale(clearcoatNormalScale: number): void;
-  setIor(ior: number): void;
-  setSheenColorFactor(rgb: RGB|string): void;
-  setSheenRoughnessFactor(roughness: number): void;
-  setTransmissionFactor(transmission: number): void;
-  setThicknessFactor(thickness: number): void;
-  setAttenuationDistance(attenuationDistance: number): void;
-  setAttenuationColor(rgb: RGB|string): void;
-  setSpecularFactor(specularFactor: number): void;
-  setSpecularColorFactor(rgb: RGB|string): void;
-  setIridescenceFactor(iridescence: number): void;
-  setIridescenceIor(ior: number): void;
-  setIridescenceThicknessMinimum(thicknessMin: number): void;
-  setIridescenceThicknessMaximum(thicknessMax: number): void;
-  setAnisotropyStrength(strength: number): void;
-  setAnisotropyRotation(rotation: number): void;
-
-  /**
-   * The PBRMetallicRoughness configuration of the material.
-   */
-  readonly pbrMetallicRoughness: PBRMetallicRoughness;
-
-  /**
-   * Asynchronously loads the underlying material resource if it's currently
-   * unloaded, otherwise the method is a noop.
-   */
-  ensureLoaded(): void;
-
-  /**
-   * Returns true if the material participates in the variant.
-   * @param name the variant name.
-   */
-  hasVariant(name: string): boolean;
-
-  /**
-   * Returns true if the material is loaded.
-   */
-  readonly isLoaded: boolean;
-
-  /**
-   * Returns true if the material is participating in scene renders.
-   */
-  readonly isActive: boolean;
-
-  /**
-   * Returns the glTF index of this material.
-   */
-  readonly index: number;
-}
-
-/**
- * The PBRMetallicRoughness encodes the PBR properties of a material
- *
- * @see https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#reference-pbrmetallicroughness
- */
-interface PBRMetallicRoughness {
-  /**
-   * The base color factor of the material, represented as RGBA values
-   */
-  readonly baseColorFactor: Readonly<RGBA>;
-
-  /**
-   * Metalness factor of the material, represented as number between 0 and 1
-   */
-  readonly metallicFactor: number;
-
-  /**
-   * Roughness factor of the material, represented as number between 0 and 1
-   */
-  readonly roughnessFactor: number;
-
-  /**
-   * A texture reference, associating an image with color information and
-   * a sampler for describing base color factor for a UV coordinate space.
-   */
-  readonly baseColorTexture: TextureInfo|null;
-
-  /**
-   * A texture reference, associating an image with color information and
-   * a sampler for describing metalness (B channel) and roughness (G channel)
-   * for a UV coordinate space.
-   */
-  readonly metallicRoughnessTexture: TextureInfo|null;
-
-  /**
-   * Changes the base color factor of the material to the given value.
-   */
-  setBaseColorFactor(rgba: RGBA|string): void;
-
-  /**
-   * Changes the metalness factor of the material to the given value.
-   */
-  setMetallicFactor(value: number): void;
-
-  /**
-   * Changes the roughness factor of the material to the given value.
-   */
-  setRoughnessFactor(value: number): void;
-}
-
-/**
- * A TextureInfo is a pointer to a specific Texture in use on a Material
- *
- * @see https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#reference-textureinfo
- */
-interface TextureInfo {
-  /**
-   * The Texture being referenced by this TextureInfo.
-   */
-  readonly texture: Texture|null;
-
-  /**
-   * Sets the texture, or removes it if argument is null. Note you cannot build
-   * your own Texture object, but must either use one from another TextureInfo,
-   * or create one with the createTexture method.
-   */
-  setTexture(texture: Texture|null): void;
-}
-
-/**
- * A Texture pairs an Image and a Sampler for use in a Material
- *
- * @see https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#reference-texture
- */
-interface Texture {
-  /**
-   * The name of the texture, if any.
-   */
-  readonly name: string;
-
-  /**
-   * The Sampler for this Texture
-   */
-  readonly sampler: Sampler;
-
-  /**
-   * The source Image for this Texture
-   */
-  readonly source: Image;
-}
-
-/**
- * A Sampler describes how to filter and wrap textures
- *
- * @see https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#reference-sampler
- */
-interface Sampler {
-  /**
-   * The name of the sampler, if any.
-   */
-  readonly name: string;
-
-  /**
-   * @see https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#samplerminfilter
-   */
-  readonly minFilter: MinFilter;
-
-  /**
-   * @see https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#samplermagfilter
-   */
-  readonly magFilter: MagFilter;
-
-  /**
-   * @see https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#samplerwraps
-   */
-  readonly wrapS: WrapMode;
-
-  /**
-   * @see https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#samplerwrapt
-   */
-  readonly wrapT: WrapMode;
-
-  /**
-   * The texture rotation in radians.
-   */
-  readonly rotation: number|null;
-
-  /**
-   * The texture scale.
-   */
-  readonly scale: Vector2DInterface|null;
-
-  /**
-   * The texture offset.
-   */
-  readonly offset: Vector2DInterface|null;
-
-  /**
-   * Configure the minFilter value of the Sampler.
-   */
-  setMinFilter(filter: MinFilter): void;
-
-  /**
-   * Configure the magFilter value of the Sampler.
-   */
-  setMagFilter(filter: MagFilter): void;
-
-  /**
-   * Configure the S (U) wrap mode of the Sampler.
-   */
-  setWrapS(mode: WrapMode): void;
-
-  /**
-   * Configure the T (V) wrap mode of the Sampler.
-   */
-  setWrapT(mode: WrapMode): void;
-
-  /**
-   * Sets the texture rotation, or resets it to zero if argument is null.
-   * Rotation is in radians, positive for counter-clockwise.
-   */
-  setRotation(rotation: number|null): void;
-
-  /**
-   * Sets the texture scale, or resets it to (1, 1) if argument is null.
-   * As the scale value increases, the repetition of the texture will increase.
-   */
-  setScale(scale: Vector2DInterface|null): void;
-
-  /**
-   * Sets the texture offset, or resets it to (0, 0) if argument is null.
-   */
-  setOffset(offset: Vector2DInterface|null): void;
-}
-
-
-/**
- * An Image represents an embedded or external image used to provide texture
- * color data.
- *
- * @see https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#reference-image
- */
-interface Image {
-  /**
-   * The name of the image, if any.
-   */
-  readonly name: string;
-
-  /**
-   * The type is 'external' if the image has a configured URI. Otherwise, it is
-   * considered to be 'embedded'. Note: this distinction is only implied by the
-   * glTF spec, and is made explicit here for convenience.
-   */
-  readonly type: 'embedded'|'external';
-
-  /**
-   * The URI of the image, if it is external.
-   */
-  readonly uri?: string;
-
-  /**
-   * The bufferView of the image, if it is embedded.
-   */
-  readonly bufferView?: number;
-
-  /**
-   * The backing HTML element, if this is a video or canvas texture.
-   */
-  readonly element?: HTMLVideoElement|HTMLCanvasElement;
-
-  /**
-   * The Lottie animation object, if this is a Lottie texture. You may wish to
-   * do image.animation as import('lottie-web').AnimationItem; to get its type
-   * info.
-   */
-  readonly animation?: any;
-
-  /**
-   * A method to create an object URL of this image at the desired
-   * resolution. Especially useful for KTX2 textures which are GPU compressed,
-   * and so are unreadable on the CPU without a method like this.
-   */
-  createThumbnail(width: number, height: number): Promise<string>;
-
-  /**
-   * Only applies to canvas textures. Call when the content of the canvas has
-   * been updated and should be reflected in the model.
-   */
-  update(): void;
-}
-</script>
         <footer>
-            <p>© 2025 Ajmal Shan P </p>
+            <p>© 2025 Ajmal Shan P</p>
             <a href="#" onclick="accessAdmin()">Admin Page</a>
         </footer>
         <script>
             function accessAdmin() {
-                const password = prompt("Enter Admin Password:");
-                if (password === "catmouse") {
+                
+                const hashedPassword = 'catmouse'; 
+                const userInput = prompt("Enter Admin Password:");
+                const userHash = btoa(userInput); 
+                if (userHash === hashedPassword) {
+                    sessionStorage.setItem('adminAuthenticated', 'true');
                     window.location.href = "admin.html";
                 } else {
                     alert("Incorrect password.");
