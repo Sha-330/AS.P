@@ -103,10 +103,23 @@
             object-fit: cover;
             border: 5px solid var(--primary-color);
             transition: transform var(--animation-speed) ease;
+            cursor: pointer; /* Indicate clickable */
         }
 
         .header img.profile-pic:hover {
             transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Enlarged state */
+        .header img.profile-pic.enlarged {
+            transform: scale(2); /* Enlarge to twice the size */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(2); /* Center and scale */
+            z-index: 1001; /* Above other content */
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
         .header h1 {
@@ -333,6 +346,9 @@
                 flex-direction: column;
                 align-items: center;
             }
+            .header img.profile-pic.enlarged {
+                transform: translate(-50%, -50%) scale(1.5); /* Smaller scale for mobile */
+            }
         }
 
         /* Dark Mode Support */
@@ -353,8 +369,9 @@
 
         /* Accessibility Improvements */
         @media (prefers-reduced-motion: reduce) {
-            #quote.animate, .ribbon {
+            #quote.animate, .ribbon, .profile-pic {
                 animation: none !important;
+                transition: none !important;
             }
         }
     </style>
@@ -382,6 +399,11 @@
             visitors.push({ id: visitorId, timestamp: timestamp });
             localStorage.setItem('portfolioVisitors', JSON.stringify(visitors));
         })();
+
+        // Profile photo enlarge logic
+        document.querySelector('.profile-pic').addEventListener('click', function() {
+            this.classList.toggle('enlarged');
+        });
     </script>
 
     <div class="portfolio-container">
@@ -526,14 +548,13 @@
                     quoteElement.classList.add("animate");
 
                     // Add ribbons
-                    for (let i = 0; i < 10; i++) { // Create 10 ribbons
+                    for (let i = 0; i < 10; i++) {
                         const ribbon = document.createElement("div");
                         ribbon.classList.add("ribbon");
-                        ribbon.style.left = `${Math.random() * 100}%`; // Random horizontal position
-                        ribbon.style.animationDuration = `${1.5 + Math.random() * 0.5}s`; // Random duration between 1.5s and 2s
+                        ribbon.style.left = `${Math.random() * 100}%`;
+                        ribbon.style.animationDuration = `${1.5 + Math.random() * 0.5}s`;
                         quoteBox.appendChild(ribbon);
                         
-                        // Remove ribbon after animation ends
                         ribbon.addEventListener("animationend", () => {
                             ribbon.remove();
                         });
