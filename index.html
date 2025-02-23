@@ -6,7 +6,7 @@
     <title>Ajmal Shan P.</title>
     <meta name="description" content="Portfolio of Ajmal Shan P., BTech student specializing in AI & Data Science">
     <meta name="keywords" content="AI, Data Science, Portfolio, BTech, Machine Learning, Cars">
-    <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script> <!-- Added back -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preload" href="https://ucarecdn.com/5b1b33d2-a95c-4afe-8618-5bb65d6d51f9/shobha.jpg" as="image">
     <style>
@@ -322,7 +322,7 @@
 </head>
 <body>
     <div id="loading-screen">
-        <model-viewer camera-controls touch-action="pan-y" autoplay ar ar-modes="webxr scene-viewer" scale="0.2 0.2 0.2" shadow-intensity="1" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" alt="An animated 3D model of a robot"></model-viewer> <!-- Added back -->
+        <model-viewer camera-controls touch-action="pan-y" autoplay ar ar-modes="webxr scene-viewer" scale="0.2 0.2 0.2" shadow-intensity="1" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" alt="An animated 3D model of a robot"></model-viewer>
         <div class="loader"></div>
     </div>
 
@@ -484,11 +484,9 @@
         </footer>
         <script>
             function accessAdmin() {
-                
-                const hashedPassword = 'catmouse'; 
+                const password = 'catmouse'; // Plaintext password
                 const userInput = prompt("Enter Admin Password:");
-                const userHash = btoa(userInput); 
-                if (userHash === hashedPassword) {
+                if (userInput === password) { // Direct comparison
                     sessionStorage.setItem('adminAuthenticated', 'true');
                     window.location.href = "admin.html";
                 } else {
