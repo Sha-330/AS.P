@@ -264,6 +264,8 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
             color: black;
+            position: relative;
+            overflow: hidden;
         }
 
         button {
@@ -299,6 +301,28 @@
             }
         }
 
+        /* Ribbon animation */
+        .ribbon {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+            animation: fall 2s ease-out forwards;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100%) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(200%) rotate(360deg);
+            }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .header h1 { font-size: 2em; }
@@ -329,7 +353,7 @@
 
         /* Accessibility Improvements */
         @media (prefers-reduced-motion: reduce) {
-            #quote.animate {
+            #quote.animate, .ribbon {
                 animation: none !important;
             }
         }
@@ -488,6 +512,7 @@
                 
                 function generateQuote() {
                     const quoteElement = document.getElementById("quote");
+                    const quoteBox = quoteElement.parentElement;
                     const randomIndex = Math.floor(Math.random() * quotes.length);
                     
                     // Remove the animation class to reset it
@@ -499,6 +524,20 @@
                     // Update the quote and add the animation class
                     quoteElement.innerText = quotes[randomIndex];
                     quoteElement.classList.add("animate");
+
+                    // Add ribbons
+                    for (let i = 0; i < 10; i++) { // Create 10 ribbons
+                        const ribbon = document.createElement("div");
+                        ribbon.classList.add("ribbon");
+                        ribbon.style.left = `${Math.random() * 100}%`; // Random horizontal position
+                        ribbon.style.animationDuration = `${1.5 + Math.random() * 0.5}s`; // Random duration between 1.5s and 2s
+                        quoteBox.appendChild(ribbon);
+                        
+                        // Remove ribbon after animation ends
+                        ribbon.addEventListener("animationend", () => {
+                            ribbon.remove();
+                        });
+                    }
                 }
             </script>
         </div>
