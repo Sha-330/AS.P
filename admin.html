@@ -3,153 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Admin Dashboard | Ajmal Shan P. Portfolio</title>
+    <title>Admin - Ajmal Shan P. Portfolio</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            min-height: 100vh;
+            color: #333;
         }
 
         .admin-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 80%;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 90%;
             max-width: 800px;
         }
 
         h1 {
-            color: #333;
             text-align: center;
+            color: #ff5733;
         }
 
-        .admin-content {
-            margin-top: 20px;
-            font-size: 1.1em;
-        }
-
-        .admin-btn {
-            padding: 10px 20px;
-            background-color: #ff5733;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-        }
-
-        .admin-btn:hover {
-            background-color: #e04b2c;
-        }
-
-        #visitor-list {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .visitor {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .visitor:last-child {
-            border-bottom: none;
-        }
-
-        .visitor p {
-            margin: 0;
-            font-size: 1.2em;
-            color: #333;
-        }
-
-        model-viewer {
+        table {
             width: 100%;
-            height: 300px;
-            display: block;
-            margin: 0 auto;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
 
-        footer {
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .logout {
+            display: block;
             text-align: center;
             margin-top: 20px;
-            font-size: 0.9em;
-            color: #555;
-        }
-
-        footer a {
             color: #ff5733;
             text-decoration: none;
+            font-weight: bold;
         }
 
-        footer a:hover {
-            color: #e04b2c;
+        .logout:hover {
+            color: #ffa500;
         }
-
-       
     </style>
 </head>
 <body>
     <div class="admin-container">
         <h1>Admin Dashboard</h1>
-        <div class="admin-content">
-            <p>"Privacy is like a secret sauce—you know it’s crucial for the recipe of a good life, but the minute you let someone in on it, they start asking for the ingredients. Suddenly, everyone’s trying to cook up your personal business, and you’re left wondering if your life is a dinner party or a reality show!"</p>
-        </div>
-
-        <div id="visitor-list">
-            <h2>List of Visitors:</h2>
-            <div id="visitors"></div>
-            <button class="admin-btn" onclick="clearVisitors()">Clear Visitors</button>
-        </div>
-        
-       
-
-        <footer>
-            <p>Go back to <a href="index.html">Portfolio</a></p>
-        </footer>
+        <table id="visitorTable">
+            <thead>
+                <tr>
+                    <th>Visitor ID</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <a href="index.html" class="logout" onclick="logout()">Logout</a>
     </div>
 
     <script>
-        function getVisitors() {
-            const visitors = JSON.parse(localStorage.getItem('portfolio-visitors')) || [];
-            return visitors;
+        // Check if admin is authenticated
+        if (!sessionStorage.getItem('adminAuthenticated')) {
+            alert('Unauthorized access. Please log in.');
+            window.location.href = 'index.html';
         }
 
-        function displayVisitors() {
-            const visitors = getVisitors();
-            const visitorContainer = document.getElementById('visitors');
-            visitorContainer.innerHTML = ''; // Clear existing data
+        // Load and display visitors
+        const visitors = JSON.parse(localStorage.getItem('portfolioVisitors') || '[]');
+        const tbody = document.querySelector('#visitorTable tbody');
+        visitors.forEach(visitor => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${visitor.id}</td><td>${visitor.timestamp}</td>`;
+            tbody.appendChild(row);
+        });
 
-            if (visitors.length === 0) {
-                visitorContainer.innerHTML = '<p>No visitors yet.</p>';
-            } else {
-                visitors.forEach(visitor => {
-                    const visitorDiv = document.createElement('div');
-                    visitorDiv.classList.add('visitor');
-                    visitorDiv.innerHTML = `<p>Name: ${visitor.name} | Visit Date: ${visitor.date}</p>`;
-                    visitorContainer.appendChild(visitorDiv);
-                });
-            }
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('adminAuthenticated');
         }
-
-        function clearVisitors() {
-            localStorage.removeItem('portfolio-visitors');
-            displayVisitors();
-        }
-
-        window.onload = function() {
-            displayVisitors();
-        };
     </script>
 </body>
 </html>
