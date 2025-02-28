@@ -23,30 +23,63 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #000000, #1a1a1a);
+            height: 100vh;
+            background: #0d1117; /* Dark background */
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            z-index: 1000;
-            transition: opacity 0.5s ease-out;
+            z-index: 9999;
         }
 
-        #loading-screen .loader {
-            border: 5px solid #ffffff33;
-            border-top: 5px solid var(--primary-color);
+        /* Atom Container */
+        .atom {
+            width: 80px;
+            height: 80px;
+            position: relative;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s cubic-bezier(0.76, 0.35, 0.2, 0.75) infinite;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            animation: spin 2s linear infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
+        /* Central Nucleus */
+        .atom::before {
+            content: '';
+            width: 15px;
+            height: 15px;
+            background: #ffcc00; /* Yellow nucleus */
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        /* Electron Orbits */
+        .electron {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border: 2px solid #ff5733; /* Red electrons */
+            border-radius: 50%;
+            animation: orbit 1.5s linear infinite;
+        }
+
+        .electron-1 { transform: rotateX(75deg); }
+        .electron-2 { transform: rotateY(75deg); animation-delay: 0.3s; }
+        .electron-3 { transform: rotateZ(75deg); animation-delay: 0.6s; }
+
+        /* Electron Orbit Animation */
+        @keyframes orbit {
+            0% { transform: rotate(0deg) translateX(40px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(40px) rotate(-360deg); }
+        }
+
+        /* Atom Spin */
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
+        
         :root {
             --primary-color: #ff5733;
             --secondary-color: #333;
@@ -378,8 +411,11 @@
 </head>
 <body>
     <div id="loading-screen">
-        <model-viewer camera-controls touch-action="pan-y" autoplay ar ar-modes="webxr scene-viewer" scale="0.2 0.2 0.2" shadow-intensity="1" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" alt="An animated 3D model of a robot"></model-viewer>
-        <div class="loader"></div>
+        <div class="atom">
+            <div class="electron electron-1"></div>
+            <div class="electron electron-2"></div>
+            <div class="electron electron-3"></div>
+        </div>
     </div>
 
     <script>
@@ -388,7 +424,7 @@
             const loadingScreen = document.getElementById('loading-screen');
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
-            }, 5950);
+            }, 3210);
         });
 
         // Visitor tracking (simplified using localStorage)
