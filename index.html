@@ -858,7 +858,146 @@
                         <li>Volunteered in various Organizations (2016- )</li>
                     </ul>
                 </div>
-                
+                <!-- Visitors Count Section -->
+<div class="section" id="visitors">
+    <div class="section-heading">
+        <h2>Site Analytics</h2>
+    </div>
+    <div class="visitors-container">
+        <div class="visitor-stats">
+            <div class="stat-card">
+                <i class="fas fa-eye stat-icon"></i>
+                <div class="stat-content">
+                    <h3>Total Visitors</h3>
+                    <p id="visitorCount">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add this CSS to your existing style section -->
+<style>
+    #visitors .section-heading::before { content: '📊'; }
+    
+    .visitors-container {
+        margin-top: 30px;
+    }
+    
+    .visitor-stats {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        flex-wrap: wrap;
+    }
+    
+    .stat-card {
+        background: var(--gradient-secondary);
+        color: white;
+        border-radius: 15px;
+        padding: 25px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--gradient-primary);
+        opacity: 0.8;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.18);
+    }
+    
+    .stat-icon {
+        font-size: 2.5em;
+        color: var(--primary-color);
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 70px;
+        min-height: 70px;
+    }
+    
+    .stat-content h3 {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+        color: white;
+    }
+    
+    .stat-content p {
+        font-size: 1.8em;
+        font-weight: bold;
+        margin: 0;
+        color: var(--primary-color);
+    }
+    
+    @media (max-width: 768px) {
+        .stat-card {
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-icon {
+            margin-bottom: 15px;
+        }
+    }
+</style>
+
+<!-- Add this JavaScript to your existing script section -->
+<script>
+    // Update visitor count on page load
+    window.addEventListener('DOMContentLoaded', () => {
+        updateVisitorCount();
+    });
+    
+    function updateVisitorCount() {
+        const visitors = JSON.parse(localStorage.getItem('portfolioVisitors') || '[]');
+        const countElement = document.getElementById('visitorCount');
+        
+        // Get unique visitors by filtering unique IDs
+        const uniqueVisitors = [...new Set(visitors.map(visitor => visitor.id))];
+        const visitorCount = uniqueVisitors.length;
+        
+        // Display the count with animation
+        animateCounter(countElement, 0, visitorCount);
+    }
+    
+    function animateCounter(element, start, end) {
+        let current = start;
+        const increment = Math.max(1, Math.floor((end - start) / 30));
+        const duration = 1500; // 1.5 seconds
+        const steps = Math.min(30, end - start);
+        const stepTime = duration / steps;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= end) {
+                current = end;
+                clearInterval(timer);
+            }
+            element.textContent = current.toLocaleString();
+        }, stepTime);
+    }
+</script>
                 <div class="quote-box">
                     <p id="quote">Press the button to generate an inspiring quote!</p>
                     <button class="quote-btn" onclick="generateQuote()">Get Quote</button>
