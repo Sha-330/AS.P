@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -189,30 +190,116 @@
             box-shadow: 0 15px 30px rgba(255, 87, 51, 0.4);
         }
 
-        /* Enlarged state */
-        .header img.profile-pic.enlarged {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(2.5); /* Center and scale */
-            z-index: 1001; /* Above other content */
-            border: 6px solid var(--primary-color);
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
-        }
+/* Profile picture and overlay improvements */
+.header img.profile-pic {
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border: 6px solid var(--primary-color);
+    transition: transform var(--animation-speed) ease, box-shadow var(--animation-speed) ease;
+    cursor: pointer; /* Indicate clickable */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 2;
+}
 
-        /* Overlay when profile pic is enlarged */
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+/* Profile pic glow effect */
+.header img.profile-pic::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.header img.profile-pic:hover {
+    transform: scale(1.05) rotate(5deg);
+    box-shadow: 0 15px 30px rgba(255, 87, 51, 0.4);
+}
+
+/* Enlarged state - IMPROVED */
+.header img.profile-pic.enlarged {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2.5);
+    z-index: 1001;
+    border: 6px solid var(--primary-color);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+    border-radius: 5%; /* Less rounded corners when enlarged */
+    max-width: 80vw;
+    max-height: 80vh;
+    object-fit: contain;
+    background-color: #fff; /* Light background for the image */
+}
+
+/* Overlay when profile pic is enlarged - IMPROVED */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Reduced opacity from 0.8 to 0.5 */
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(0.3px); /* Add blur effect */
+}
+
+.overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Add close button for the enlarged image */
+.close-button {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1002;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.close-button:hover {
+    transform: scale(1.1);
+    background-color: #ff8a65;
+}
+
+.close-button.active {
+    display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header img.profile-pic.enlarged {
+        transform: translate(-50%, -50%) scale(1.8);
+    }
+    
+    .close-button {
+        top: 10px;
+        right: 10px;
+    }
+}
 
         .overlay.active {
             display: block;
@@ -585,7 +672,7 @@
             background: linear-gradient(45deg, var(--primary-color), #ffcc00);
             box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
             border-radius: 3px;
-            animation: fallAndFade 3s ease-out forwards;
+            animation: fallAndFade 2s ease-out forwards;
             z-index: 3;
             opacity: 0;
         }
@@ -858,23 +945,28 @@
                         <li>Volunteered in various Organizations (2016- )</li>
                     </ul>
                 </div>
-                <!-- Visitors Count Section -->
-<div class="section" id="visitors">
-    <div class="section-heading">
-        <h2>Site Analytics</h2>
-    </div>
-    <div class="visitors-container">
-        <div class="visitor-stats">
-            <div class="stat-card">
-                <i class="fas fa-eye stat-icon"></i>
-                <div class="stat-content">
-                    <h3>Total Visitors</h3>
-                    <p id="visitorCount">Loading...</p>
+                <!--Visitor count -->
+                <div class="section" id="visitors">
+                    <div class="section-heading">
+                        <h2>Site Analytics</h2>
+                    </div>
+                    <div class="visitors-container">
+                        <div class="visitor-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon-container">
+                                    <i class="fas fa-eye stat-icon"></i>
+                                    <div class="eye-animation">
+                                        <div class="eye-ball"></div>
+                                    </div>
+                                </div>
+                                <div class="stat-content">
+                                    <h3>Total Visitors</h3>
+                                    <p id="visitorCount">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Add this CSS to your existing style section -->
 <style>
@@ -882,13 +974,13 @@
     
     .visitors-container {
         margin-top: 30px;
+        display: flex;
+        justify-content: center;
     }
     
     .visitor-stats {
-        display: flex;
-        justify-content: center;
-        gap: 25px;
-        flex-wrap: wrap;
+        width: 100%;
+        max-width: 450px;
     }
     
     .stat-card {
@@ -900,11 +992,11 @@
         align-items: center;
         gap: 20px;
         width: 100%;
-        max-width: 400px;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         position: relative;
         overflow: hidden;
+        text-align: left;
     }
     
     .stat-card::before {
@@ -923,6 +1015,12 @@
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.18);
     }
     
+    .stat-icon-container {
+        position: relative;
+        width: 80px;
+        height: 80px;
+    }
+    
     .stat-icon {
         font-size: 2.5em;
         color: var(--primary-color);
@@ -932,8 +1030,54 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        min-width: 70px;
-        min-height: 70px;
+        width: 80px;
+        height: 80px;
+        position: relative;
+        z-index: 1;
+    }
+    
+    /* Eye Animation */
+    .eye-animation {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        z-index: 2;
+        opacity: 0;
+        animation: blink 3s infinite;
+    }
+    
+    .eye-ball {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: #000;
+        position: relative;
+        animation: look 5s infinite;
+    }
+    
+    @keyframes blink {
+        0%, 45%, 55%, 100% { opacity: 0; }
+        50% { opacity: 1; }
+    }
+    
+    @keyframes look {
+        0%, 100% { transform: translate(0, 0); }
+        25% { transform: translate(3px, -3px); }
+        50% { transform: translate(-3px, 3px); }
+        75% { transform: translate(3px, 3px); }
+    }
+    
+    .stat-content {
+        flex-grow: 1;
     }
     
     .stat-content h3 {
@@ -947,6 +1091,7 @@
         font-weight: bold;
         margin: 0;
         color: var(--primary-color);
+        text-align: right;
     }
     
     @media (max-width: 768px) {
@@ -954,10 +1099,21 @@
             flex-direction: column;
             text-align: center;
             padding: 20px;
+            align-items: center;
         }
         
-        .stat-icon {
+        .stat-icon-container {
             margin-bottom: 15px;
+        }
+        
+        .stat-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .stat-content p {
+            text-align: center;
         }
     }
 </style>
@@ -967,6 +1123,21 @@
     // Update visitor count on page load
     window.addEventListener('DOMContentLoaded', () => {
         updateVisitorCount();
+        
+        // Activate eye animation when hovering over stat card
+        const statCard = document.querySelector('.stat-card');
+        statCard.addEventListener('mouseenter', () => {
+            const eyeAnimation = document.querySelector('.eye-animation');
+            eyeAnimation.style.animation = 'none';
+            eyeAnimation.offsetHeight; // Force reflow
+            eyeAnimation.style.animation = 'blink 4s infinite';
+            eyeAnimation.style.opacity = '1';
+        });
+        
+        statCard.addEventListener('mouseleave', () => {
+            const eyeAnimation = document.querySelector('.eye-animation');
+            eyeAnimation.style.opacity = '0';
+        });
     });
     
     function updateVisitorCount() {
@@ -997,8 +1168,7 @@
             element.textContent = current.toLocaleString();
         }, stepTime);
     }
-</script>
-                <div class="quote-box">
+</script>                <div class="quote-box">
                     <p id="quote">Press the button to generate an inspiring quote!</p>
                     <button class="quote-btn" onclick="generateQuote()">Get Quote</button>
                 </div>
